@@ -1,8 +1,8 @@
-from django.http import HttpResponse
+# from django.http import HttpResponse
+from django.shortcuts import render
 
 # method view
 def index(request):
-    return HttpResponse("<h1>Hello World</h1>")
-
-def about(request):
-    return HttpResponse("<h1>About Page</h1>")
+    # return HttpResponse("<h1>Hello World</h1>")
+    # render template index
+    return render(request, 'index.html')

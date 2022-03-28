@@ -15,20 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-# import views.py
 from . import views
-""" from django.http import HttpResponse
-
-# method view
-def index(request):
-    return HttpResponse("<h1>Hello World</h1>")
-
-def about(request):
-    return HttpResponse("<h1>About Page</h1>") """
+# import views blog & about
+from blog import views as blogViews
+from about import views as aboutViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # mengarahakan ke url, mengambil views
     path('', views.index),
-    path('about/', views.about)
+    path('about/', aboutViews.index),
+    path('blog/', blogViews.index)
 ]
