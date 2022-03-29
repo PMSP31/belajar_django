@@ -1,9 +1,23 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return render(request, "blog/index.html")
+    context = {
+        'title' : 'Interior X',
+        'contributor' : 'Rudi'
+    }
+    return render(request, "blog/index.html", context)
 
-def recent(request):
-    return HttpResponse('<h1> ini adalah recent page </h1>')
+def story(request):
+    context = {
+        'title' : 'Story',
+        'contributor' : 'Yanto'
+    }
+    return render(request, "blog/index.html", context)
+
+def news(request):
+    context = {
+        'title' : 'News',
+        'contributor' : 'Joko'
+    }
+    return render(request, "blog/index.html", context)
