@@ -1,20 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Page | Interior X</title>
+    <title>About Page | {{ title }}</title>
   </head>
   <body>
-    <h1>About Interior X</h1>
-    <p>powered by Django</p>
-    <br />
-
+    <!-- <img src="{% static 'about/img/banner_about.png'%}" alt="" style="width: 100%;"> -->
+    <img src="{% static banner %}" alt="" style="width: 100%" />
+    <!-- nav with template tags -->
     <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/blog/">Blog</a></li>
+      {% for link,name in nav %}
+      <li>
+        <a href="{{link}}"> {{name}} </a>
+      </li>
+      {% endfor %}
     </ul>
+
+    <br />
+    <h1>{{subtitle}}</h1>
+    <p>{{main}}</p>
   </body>
 </html>

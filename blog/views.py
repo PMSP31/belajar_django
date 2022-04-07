@@ -3,22 +3,25 @@ from django.shortcuts import render
 # Create your views here.
 def index(request):
     context = {
-        'title' : 'Interior X',
-        'contributor' : 'Rudi',
+        "app_css" : 'blog/css/styles.css',
+        'title' : 'Blog | Interior X',
+        'heading' : 'Blog on Interior X',
         'nav' : [
             ['/', 'Home'],
             ['/blog', 'Blog'],
             ['/blog/story', 'Story'],
             ['/blog/news', 'News'],
             ['/about', 'About']
-        ]
+        ],
+        "banner": 'blog/img/banner_blog.png',
     }
-    return render(request, "blog/index.html", context)
+    return render(request, "index.html", context)
 
 def story(request):
     context = {
-        'title' : 'Story',
-        'contributor' : 'Yanto',
+        "app_css" : 'blog/css/styles.css',
+        'title' : 'Story | Interior X',
+        'heading' : 'Story on Interior X',
         'content' : """Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nulla sint
                     numquam modi, repellat consequuntur a quas labore at nihil, perspiciatis
                     iste vitae odit magnam! Dignissimos assumenda aut reiciendis tempore
@@ -31,14 +34,16 @@ def story(request):
             ['/blog/story', 'Story'],
             ['/blog/news', 'News'],
             ['/about', 'About']
-        ]
+        ],
+        "banner": 'blog/img/banner_blog.png',
     }
-    return render(request, "blog/index.html", context)
+    return render(request, "index.html", context)
 
 def news(request):
     context = {
-        'title' : 'News',
-        'contributor' : 'Joko',
+        "app_css" : 'blog/css/styles.css',
+        'title' : 'News | Interior X',
+        'heading' : "News on Interior X",
         'content': """Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nulla sint
                         numquam modi, repellat consequuntur a quas labore at nihil, perspiciatis
                         iste vitae odit magnam! Dignissimos assumenda aut reiciendis tempore
@@ -57,6 +62,7 @@ def news(request):
             ['/blog/story', 'Story'],
             ['/blog/news', 'News'],
             ['/about', 'About']
-        ]
+        ],
+        "banner": 'blog/img/banner_blog.png',
     }
-    return render(request, "blog/index.html", context)
+    return render(request, "index.html", context)

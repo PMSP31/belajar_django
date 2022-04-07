@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,21 +8,13 @@
     <title>Blog Page | {{ title }}</title>
   </head>
   <body>
+    <!-- <img src="{% static 'blog/img/banner_blog.png'%}" alt="" style="width: 100%;"> -->
+    <img src="{% static banner %}" alt="" style="width: 100%" />
     <h1>Blog page for {{ title }}</h1>
     <span>Contributor : {{ contributor }} </span>
     <br />
 
     <p>{{ content }}</p>
-
-    <!-- <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/blog/">Blog</a></li>
-      <ul>
-        <li><a href="/blog/story">Story</a></li>
-        <li><a href="/blog/news">News</a></li>
-      </ul>
-    </ul> -->
 
     <!-- nav with template tags -->
     <ul>
