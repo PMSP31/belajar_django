@@ -3,8 +3,9 @@ from django.shortcuts import render
 # method view
 def index(request):
     context = {
-        'title' : 'Home | Interior X',
-        'heading' : 'Welcome To Interior X',
+        'title' : 'Home | Kelas Terbuka',
+        'heading' : 'Selamat Datang di Kelas Terbuka',
+        'subheading' : 'Tempat Belajarnya Programmer Indonesia',
         'nav' : [
             ['/', 'Home'],
             ['/blog', 'Blog'],
