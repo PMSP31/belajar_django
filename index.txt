@@ -1,0 +1,18 @@
+folder Django_project adalah base directory
+
+structure project django_project
+- manage.py = core file untuk menjalankan semua operasi pada project django
+- folder mysite = project yang kita buat
+    - __init__.py = file kosong untuk menyatakan dir ini adalah python package
+    - settings.py = berisi settingan project kita
+    - urls.py = file deklarasi URL
+    - wsgi.py = sebagai connectivity antara interface dan server (Entri point untuk WSGI-compatible)
+wsgi = web server gateaway interface
+
+MODEL
+1. sambungkan django dengan MySQL
+2. buat models pada models.py pada app
+3. python manage.py makemigrations
+4. django akan membuat file migrations
+5. python manage.py migrate, secara otomatis django membuat table pada DB (MySQL)
+berdasarkan user,password,db name yang telah ada pada settings.py

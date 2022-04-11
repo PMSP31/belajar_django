@@ -1,7 +1,12 @@
 from django.shortcuts import render
+from .models import Post
 
 # Create your views here.
 def index(request):
+    # queryset
+    posts = Post.objects.all() #ambil semua Post
+    # print(posts)
+
     context = {
         "app_css" : 'blog/css/styles.css',
         'title' : 'Blog | Kelas Terbuka',
@@ -15,6 +20,7 @@ def index(request):
             ['/about', 'About']
         ],
         "banner": 'blog/img/bannerBlog.png',
+        'Posts' : posts
     }
     return render(request, "blog/index.html", context)
 
