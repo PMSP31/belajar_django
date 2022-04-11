@@ -1,6 +1,7 @@
-.heading {
-  color: #f7983e;
-}
-.content {
-  text-align: center;
+.jumbotron {
+  background-image: url("/static/about/img/bannerAbout.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 500px;
 }

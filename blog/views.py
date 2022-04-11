@@ -4,8 +4,9 @@ from django.shortcuts import render
 def index(request):
     context = {
         "app_css" : 'blog/css/styles.css',
-        'title' : 'Blog | Interior X',
-        'heading' : 'Blog on Interior X',
+        'title' : 'Blog | Kelas Terbuka',
+        'heading' : "Blog",
+        'subheading' : 'Blog on Kelas Terbuka',
         'nav' : [
             ['/', 'Home'],
             ['/blog', 'Blog'],
@@ -13,15 +14,16 @@ def index(request):
             ['/blog/news', 'News'],
             ['/about', 'About']
         ],
-        "banner": 'blog/img/banner_blog.png',
+        "banner": 'blog/img/bannerBlog.png',
     }
-    return render(request, "index.html", context)
+    return render(request, "blog/index.html", context)
 
 def story(request):
     context = {
         "app_css" : 'blog/css/styles.css',
-        'title' : 'Story | Interior X',
-        'heading' : 'Story on Interior X',
+        'title' : 'Story | Kelas Terbuka',
+        'heading' : "Story",
+        'subheading' : 'Story on Kelas Terbuka',
         'content' : """Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nulla sint
                     numquam modi, repellat consequuntur a quas labore at nihil, perspiciatis
                     iste vitae odit magnam! Dignissimos assumenda aut reiciendis tempore
@@ -35,15 +37,16 @@ def story(request):
             ['/blog/news', 'News'],
             ['/about', 'About']
         ],
-        "banner": 'blog/img/banner_blog.png',
+        "banner": 'blog/img/bannerBlog.png',
     }
-    return render(request, "index.html", context)
+    return render(request, "blog/index.html", context)
 
 def news(request):
     context = {
         "app_css" : 'blog/css/styles.css',
-        'title' : 'News | Interior X',
-        'heading' : "News on Interior X",
+        'title' : 'News | Kelas Terbuka',
+        'heading' : "News",
+        'subheading' : "News on Kelas Terbuka",
         'content': """Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nulla sint
                         numquam modi, repellat consequuntur a quas labore at nihil, perspiciatis
                         iste vitae odit magnam! Dignissimos assumenda aut reiciendis tempore
@@ -63,6 +66,6 @@ def news(request):
             ['/blog/news', 'News'],
             ['/about', 'About']
         ],
-        "banner": 'blog/img/banner_blog.png',
+        "banner": 'blog/img/bannerBlog.png',
     }
-    return render(request, "index.html", context)
+    return render(request, "blog/index.html", context)

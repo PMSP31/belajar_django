@@ -1,28 +1,26 @@
+{% extends 'base.html' %} 
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog Page | {{ title }}</title>
-  </head>
-  <body>
-    <!-- <img src="{% static 'blog/img/banner_blog.png'%}" alt="" style="width: 100%;"> -->
-    <img src="{% static banner %}" alt="" style="width: 100%" />
-    <h1>Blog page for {{ title }}</h1>
-    <span>Contributor : {{ contributor }} </span>
-    <br />
 
-    <p>{{ content }}</p>
+{% block app_css %}
+<link rel="stylesheet" href="{% static 'blog/css/styles.css'%}" />
+{% endblock app_css %}
+  
 
-    <!-- nav with template tags -->
-    <ul>
-      {% for link,name in nav %}
-      <li>
-        <a href="{{link}}"> {{name}} </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+{% block header %}
+<h1 class="display-4 text-left" style="margin-top: 100px;">{{heading}}</h1>
+<p class="lead text-left">~ {{subheading}}</p>
+{% endblock header %}
+
+
+{% block content-1 %}
+  <div class="row" style="height: 400px;">
+    <h1>Content Blog</h1>
+  </div>
+{% endblock content-1 %}
+
+{% block content-2 %}
+  <div class="row" style="height: 400px;">
+    <h1>Content Blog</h1>
+  </div>
+{% endblock content-2 %}
+  

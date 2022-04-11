@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <!-- include styles-->
+    {% include 'snippets/styles.html' %} {% block app_css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}" />
+    {% endblock app_css %}
+  </head>
+  <body>
+    <!-- include nav -->
+    {% include 'snippets/navbar.html' %}
+
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container text-white text-center">
+        {% block header %} {% endblock header %}
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div
+        class="container bg-white text-dark shadow"
+        style="margin-top: -100px"
+        id="myContent"
+      >
+        {% block content-1 %} {% endblock content-1 %}
+      </div>
+
+      <div class="container bg-dark text-white shadow">
+        {% block content-2 %} {% endblock content-2 %}
+      </div>
+    </div>
+
+    <!-- include scripts-->
+    {% include 'snippets/scripts.html' %}
+  </body>
+</html>
