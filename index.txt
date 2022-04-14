@@ -16,3 +16,10 @@ MODEL
 4. django akan membuat file migrations
 5. python manage.py migrate, secara otomatis django membuat table pada DB (MySQL)
 berdasarkan user,password,db name yang telah ada pada settings.py
+
+QuerySet:
+(Post = Model)
+~ Post.objects.all() = mengambil semua data pada Post
+~ Post.objects.filter(option) = mengambil data pada Post berdasarkan option filter
+~ Post.objects.get(option) = mengambil 1 data yang sesuai pada Post berdasarkan option get
+~ Post.objects.exclude(option) = mengambil data pada Post kecuali yang sesuai dengan option
