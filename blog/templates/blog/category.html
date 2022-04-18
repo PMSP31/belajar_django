@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block app_css %}
+<link rel="stylesheet" href="{% static 'blog/css/styles.css'%}" />
+{% endblock app_css %}
+
+{% block content-1 %}
+    <div class="row">
+        <div class="col">
+            <h1>Other Category</h1>
+            <a href="/blog/" class="badge badge-primary"> All-post </a>
+            {% for dataCategory in Categories %}
+            <a href="/blog/category/{{dataCategory.category}}" class="badge badge-primary"> {{dataCategory.category}} </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% for post in Posts %}
+        <div class="row my-5">
+        <div class="col">
+            <a href="/blog/post/{{post.slug}}" class="link-detail-post h1">
+            {{post.title}}
+            </a>
+            <!-- truncatechars = menampilkan beberapa char sesuai nilai yang ditentukan -->
+            <p> {{post.body | truncatechars:200}} </p>
+            <p> {{post.publish}} </p>
+        </div>
+        </div>
+    {% endfor %}
+
+{% endblock content-1 %}

@@ -22,7 +22,6 @@ urlpatterns = [
     path('', views.index),
     re_path(r'^(?P<input>[0-9]{2})/$', views.number),
     re_path(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[\w-]+)$', views.date),
-    # menyatukan file urls dari tiap-tiap app
     path('about/', include('about.urls')),
     path('blog/', include('blog.urls'))
 ]

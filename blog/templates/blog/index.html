@@ -13,16 +13,24 @@
 
 {% block content-1 %}
 
+  <div class="row">
+    <div class="col">
+      <h1>Blog By Category</h1>
+      <a href="/blog/" class="badge badge-primary"> All-post </a>
+      {% for dataCategory in Categories %}
+      <a href="/blog/category/{{dataCategory.category}}" class="badge badge-primary"> {{dataCategory.category}} </a>
+      {% endfor %}
+    </div>
+  </div>
+
   {% for post in Posts %}
-    <div class="row" style="height: 400px;">
+    <div class="row my-5">
       <div class="col">
-        <h1>{{post.title}}</h1>
-        <br>
-        <p>{{post.body}}</p>
-        <br>
-        <p>~ {{post.author}}</p>
-        <br>
-        <p>{{post.time_post}}</p>
+        <a href="/blog/post/{{post.slug}}" class="link-detail-post h1">
+          {{post.title}}
+        </a>
+        <p> {{post.body | truncatechars:200}} </p>
+        <p> {{post.publish}} </p>
       </div>
     </div>
   {% endfor %}

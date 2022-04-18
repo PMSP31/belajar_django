@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block app_css %}
+<link rel="stylesheet" href="{% static 'blog/css/styles.css'%}" />
+{% endblock app_css %}
+
+{% block content-1 %}
+    <div class="row my-5">
+      <div class="col">
+        <h1>{{Post.title}}</h1>
+        <span class="badge badge-pill badge-primary">{{Post.category}}</span>
+        <br>
+        <span class="text-muted"> Publish at : {{Post.publish}} </span>
+        <br>
+        <span class="text-muted"> Update at : {{Post.update}} </span>
+        <br>
+        <br>
+        <p> {{Post.body}} </p>
+      </div>
+    </div>
+
+{% endblock content-1 %}
