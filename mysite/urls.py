@@ -19,9 +19,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
-    re_path(r'^(?P<input>[0-9]{2})/$', views.number),
-    re_path(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[\w-]+)$', views.date),
-    path('about/', include('about.urls')),
-    path('blog/', include('blog.urls'))
+    path('', views.index, name='index'),
+    path('about/', include('about.urls', namespace='about')),
+    path('blog/', include('blog.urls', namespace='blog'))
 ]

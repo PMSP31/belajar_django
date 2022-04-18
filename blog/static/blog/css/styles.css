@@ -14,7 +14,7 @@
   color: black;
   font-weight: bold;
 
-  transition: background-size 500ms;
+  transition: background-size .3s;
 }
 
 .link-detail-post:hover{
