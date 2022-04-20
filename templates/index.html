@@ -7,16 +7,17 @@
 {% endblock header %} 
 
 {% block content-1 %}
-  <div class="row" style="height: 400px">
-    <h1>Content</h1>
+  <div class="row" style="height: 100%">
+    <div class="col">
+    <h1>Form Field</h1>
+      <form method="post">
+        {% csrf_token %}
+        <table>
+          {{form_field.as_table}}
+        </table>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
   </div>
 {% endblock content-1 %}
-
-<!-- overload -->
-<!-- jika ini ditambahkan, maka akan menimpa/overload pada base.html -->
-{% block content-2 %}
-<div class="row" style="height: 300px">
-  <h1>Overload Content</h1>
-</div>
-{% endblock content-2 %}
   

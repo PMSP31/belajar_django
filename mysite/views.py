@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .forms import FormField
 
 # method view
 def index(request):
+    form_field = FormField()
     context = {
         'title' : 'Home | Kelas Terbuka',
         'heading' : 'Selamat Datang di Kelas Terbuka',
@@ -12,13 +13,9 @@ def index(request):
             ['/blog', 'Blog'],
             ['/about', 'About']
         ],
+        'form_field' : form_field
     }
+
+    if request.method == 'POST' :
+        print(request.POST)
     return render(request, 'index.html', context)
-
-def number(request, input):
-    heading = f"<h1>Page-{input}</h1>"
-    return HttpResponse(heading)
-
-def date(request, year, month, day):
-    heading = f"Date : {year} / {month} / {day}"
-    return HttpResponse(heading)
