@@ -1,0 +1,35 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block app_css %}
+<link rel="stylesheet" href="{% static 'blog/css/styles.css'%}" />
+{% endblock app_css %}
+
+{% block header %}
+<h1 class="display-4 text-left" style="margin-top: 100px;">{{heading}}</h1>
+<p class="lead text-left">~ {{subheading}}</p>
+{% endblock header %}
+
+{% block content-1 %}
+    <div class="row" style="height: 100%;" >
+        <div class="col self-center">
+            <form method="post">
+                {% csrf_token %}
+                {{error.title}}
+                <div class="form-group">
+                    {{post_form.title.label_tag}}
+                    {{post_form.title}}
+                </div>
+                <div class="form-group">
+                    {{post_form.body.label_tag}}
+                    {{post_form.body}}
+                </div>
+                <div class="form-group">
+                    {{post_form.category.label_tag}}
+                    {{post_form.category}}
+                </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock content-1 %}

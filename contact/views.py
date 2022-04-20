@@ -1,23 +1,35 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import ContactForm
+from .models import ContactModel
 
 # Create your views here.
 def index(request):
-    contact_form = ContactForm()
+    contact = ContactModel.objects.all()
     context={
         'title': 'Contact | Kelas Terbuka',
         'heading' : 'Contact',
         'subheading' : 'Contact Kelas Terbuka',
-        'contact_form' : contact_form
+        'data_contact' : contact
     }
-    # get data from contact_form
-    if request.method == "POST":
-        form = ContactForm(request.POST)
-        # check if form is valid data
-        if form.is_valid():
-            print(request.POST)
-            # context['nama'] = request.POST['nama']
-            # context['email'] = request.POST['email']
             
     return render(request, 'contact/index.html', context)
+
+# create ~ get all data form
+def create(request):
+    contact_form = ContactForm()
+    context={
+        'title' : 'POST',
+        'contact_form' : contact_form
+    }
+    if request.method == 'POST' :
+        contact = ContactForm(request.POST)
+        if contact.is_valid() :
+            ContactModel.objects.create(
+                nama_lengkap = request.POST['nama_lengkap'],
+                jenis_kelamin = request.POST['jenis_kelamin'],
+                # tanggal_lahir = request.POST['tanggal_lahir'],
+                email = request.POST['email'],
+            )
+            return HttpResponseRedirect('/contact/')
+    return render(request, 'contact/create.html', context)

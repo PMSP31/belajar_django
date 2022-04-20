@@ -26,14 +26,14 @@ class ContactForm(forms.Form):
                 }
             )
         )
-    tanggal_lahir = forms.DateField(
+    """ tanggal_lahir = forms.DateField(
             widget=forms.SelectDateWidget(
                     years=TAHUN,
                     attrs={
                         'class' : 'form-control col-sm-2'
                     }
                 )
-        )
+        ) """
     email = forms.EmailField(
             label='Email',
             widget=forms.TextInput(

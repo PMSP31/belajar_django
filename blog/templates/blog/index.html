@@ -20,6 +20,9 @@
       <a href="{% url 'blog:category' categoryInput=dataCategory.category%}" class="badge badge-primary"> {{dataCategory.category}} </a>
       {% endfor %}
     </div>
+    <div class="col mt-2">
+      <a href="{% url 'blog:create' %}" class="badge badge-secondary float-right">+ Create Post</a>
+    </div>
   </div>
 
   {% for post in Posts %}
