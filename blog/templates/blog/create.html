@@ -15,8 +15,8 @@
         <div class="col self-center">
             <form method="post">
                 {% csrf_token %}
-                {{error.title}}
-                <div class="form-group">
+                <!-- <div class="form-group">
+                    {{error.title}}
                     {{post_form.title.label_tag}}
                     {{post_form.title}}
                 </div>
@@ -27,7 +27,15 @@
                 <div class="form-group">
                     {{post_form.category.label_tag}}
                     {{post_form.category}}
-                </div>
+                </div> -->
+                
+                <!-- form with ModelForm -->
+                {% for form in post_form %}
+                    <div class="form-group">
+                        {{form.label}}
+                        {{form}}
+                    </div>
+                {% endfor %}
                 <button class="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>

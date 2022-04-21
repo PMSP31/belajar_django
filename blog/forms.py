@@ -46,3 +46,24 @@ class PostForm(forms.ModelForm):
             'body',
             'category'
         ]
+        widgets={
+            'title' : forms.TextInput(
+                attrs={
+                    'class' : 'form-control col-sm-6',
+                    'placeholder' : 'Input Title Post...'
+                }
+            ),
+
+            'body' : forms.Textarea(
+                attrs={
+                    'class' : 'form-control col-sm-6',
+                    'placeholder' : 'Input Body Post...'
+                }
+            ),
+
+            'category' : forms.Select(
+                attrs={
+                    'class' : 'form-control col-sm-6',
+                }
+            ),
+        }

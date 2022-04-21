@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from .validators import validate_title
 
 # Create your models here.
 class Post(models.Model):
@@ -7,12 +8,27 @@ class Post(models.Model):
         ('blog','Blog'),
         ('jurnal', 'Jurnal')
     )
-    title = models.CharField(max_length=255)
+    
+    title = models.CharField(
+            max_length=255, 
+            validators=[validate_title]
+        )
     body = models.TextField()
-    category = models.CharField(max_length=50, default='blog', choices=LIST_CATEGORY)
-    publish = models.DateTimeField(auto_now_add=True)
-    update = models.DateTimeField(auto_now= True)
-    slug = models.SlugField(blank=True, editable=False)
+    category = models.CharField(
+            max_length=50, 
+            default='blog', 
+            choices=LIST_CATEGORY
+        )
+    publish = models.DateTimeField(
+            auto_now_add=True
+        )
+    update = models.DateTimeField(
+            auto_now= True
+        )
+    slug = models.SlugField(
+            blank=True, 
+            editable=False
+        )
 
     def save(self, *args, **kwargs):
         # create slug from title
