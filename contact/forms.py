@@ -1,7 +1,7 @@
 from django import forms
 
 # create form by django
-class ContactForm(forms.Form):
+""" class ContactForm(forms.Form):
     GENDER = (
         ('L', 'Laki-Laki'),
         ('P', 'Perempuan')
@@ -26,14 +26,14 @@ class ContactForm(forms.Form):
                 }
             )
         )
-    """ tanggal_lahir = forms.DateField(
+    tanggal_lahir = forms.DateField(
             widget=forms.SelectDateWidget(
                     years=TAHUN,
                     attrs={
                         'class' : 'form-control col-sm-2'
                     }
                 )
-        ) """
+        )
     email = forms.EmailField(
             label='Email',
             widget=forms.TextInput(
@@ -50,4 +50,42 @@ class ContactForm(forms.Form):
                     'class' : 'form-check-input'
                 }
             )
-        )
+        ) """
+
+from .models import ContactModel
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactModel
+        fields=[
+            'nama_lengkap',
+            'jenis_kelamin',
+            'tanggal_lahir',
+            'email'
+        ]
+        TAHUN = range(1945, 2022, 1)
+        widgets={
+            'nama_lengkap' : forms.TextInput(
+                attrs={
+                    'class' : 'form-control col-sm-6',
+                    'placeholder' : 'Masukan Nama Lengkap Anda'
+                }
+            ),
+            'jenis_kelamin' : forms.Select(
+                attrs={
+                    'class' : 'form-control col-sm-6'
+                }
+            ),
+            'tanggal_lahir' : forms.SelectDateWidget(
+                years=TAHUN,
+                attrs={
+                    'class' : 'form-control col-sm-6'
+                }
+            ),
+            'email' : forms.TextInput(
+                attrs={
+                    'class' : 'form-control col-sm-6',
+                    'placeholder' : 'Masukan Email Anda...'
+                }
+            )
+        }

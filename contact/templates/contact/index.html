@@ -5,17 +5,17 @@
 <p class="lead text-left">~ {{subheading}}</p>
 {% endblock header %} 
 
-{% block content-2 %}
+{% block content-1 %}
   <div class="row">
     <div class="col">
       {% for data in data_contact %}
         <h3> {{data.nama_lengkap}} </h3>
         <h3> {{data.jenis_kelamin}} </h3>
-        <!-- <h3> {{data.tanggal_lahir}} </h3> -->
+        <h3> {{data.tanggal_lahir}} </h3>
         <h3> {{data.email}} </h3>
         <h3> {{data.sign_in}} </h3>
       {% endfor %}
     </div>
   </div>  
-{% endblock content-2 %}
+{% endblock content-1 %}
   

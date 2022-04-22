@@ -10,7 +10,7 @@
   <div class="col">
     <form method="post">
       {% csrf_token %} 
-      <div class="form-group">
+      <!-- <div class="form-group">
         {{contact_form.nama_lengkap.label_tag}}
         {{contact_form.nama_lengkap}}
       </div>
@@ -26,12 +26,12 @@
           </div>
         {% endfor %}
       </div>
-       <!-- <div class="form-group">
+       <div class="form-group">
         {{contact_form.tanggal_lahir.label_tag}}
         <div class="form-row">
           {{contact_form.tanggal_lahir}}
         </div>
-      </div> -->
+      </div>
       <div class="form-group">
         {{contact_form.email.label_tag}}
         {{contact_form.email}}
@@ -43,7 +43,15 @@
             {{contact_form.agree.label}}
           </label>
         </div>
-      </div>
+      </div> -->
+      
+      {% for contact in contact_form %}
+        <div class="form-group">
+          {{contact.label}}
+          {{contact}}
+        </div>
+      {% endfor %}
+        
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>
     <br>

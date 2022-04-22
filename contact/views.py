@@ -17,19 +17,17 @@ def index(request):
 
 # create ~ get all data form
 def create(request):
-    contact_form = ContactForm()
+    contact_form = ContactForm(request.POST)
     context={
         'title' : 'POST',
         'contact_form' : contact_form
     }
     if request.method == 'POST' :
-        contact = ContactForm(request.POST)
-        if contact.is_valid() :
-            ContactModel.objects.create(
-                nama_lengkap = request.POST['nama_lengkap'],
-                jenis_kelamin = request.POST['jenis_kelamin'],
-                # tanggal_lahir = request.POST['tanggal_lahir'],
-                email = request.POST['email'],
-            )
+        if contact_form.is_valid() :
+            contact_form.save()
             return HttpResponseRedirect('/contact/')
+        else :
+            error = contact_form.errors
+            context['error'] = error
+            
     return render(request, 'contact/create.html', context)
