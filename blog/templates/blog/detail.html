@@ -17,7 +17,10 @@
         <br>
         <br>
         <p> {{Post.body}} </p>
+        <div class="col">
+          <a href="{% url 'blog:delete' Post.id %}" onclick="confirm('Apakah Anda Yakin Ingin Menghapust Postingan ini??')" class="btn btn-danger">Delete Post</a>
+          <a href="{% url 'blog:update' Post.id %}" class="btn btn-warning">Update</a>
+        </div>
       </div>
     </div>
-
 {% endblock content-1 %}
