@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1 class="display-4">{{ heading }}</h1>
+{% endblock header %} 
+
+{% block content-1 %}
+  <div class="row" style="height: 100%">
+    <a href="{% url 'sosmed:create' %}" class="btn btn-primary p-6">Add</a>
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Content</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for akun in sosmeds %} 
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{akun.first_name}}</td>
+                <td>{{akun.last_name}}</td>
+                <td>{{akun.username}}</td>
+                <td>{{akun.content}}</td>
+                <td><a href="{% url 'sosmed:delete' akun.id %}" class="btn btn-danger">Delete</a></td>
+                <td><a href="{% url 'sosmed:update' akun.id %}" class="btn btn-outline-warning">Update</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>    
+    </table>
+    <h3>Filter By Content : </h3>
+    {% for content in list_contents %}
+    <a href="{% url 'sosmed:index' %}?user_content={{content}}" class="badge badge-info m-2 px-4">{{content}}</a>
+    {% endfor %}
+    <a href="{% url 'sosmed:index' %}" class="badge badge-info m-2 px-4">All</a>
+    
+  </div>
+{% endblock content-1 %}
+  

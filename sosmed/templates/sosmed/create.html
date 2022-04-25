@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content-1 %}
+	<h1>{{title}}</h1>
+	<form method="POST">
+		{% csrf_token %}
+		<table>
+			{{sosmed_form.as_table}}
+		</table>
+		<button type="Submit">Kirim</button>
+	</form>
+{% endblock content-1 %}
