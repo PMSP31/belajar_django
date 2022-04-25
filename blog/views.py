@@ -1,92 +1,96 @@
 from django.shortcuts import render, redirect
-from .models import Post # import model
+from django.views import View
+from django.views.generic.base import TemplateView, RedirectView
+from .models import Post 
 from .forms import PostForm
 
 # Create your views here.
-def index(request):
-    posts = Post.objects.all()
-    categories = Post.objects.values('category').distinct()
+class FilterListView:
+    def get_list_data(self, get_request):
+        if len(get_request) == 0:
+            filter_data = Post.objects.all()
+        elif get_request.__contains__('post_category'):
+            filter_data = Post.objects.filter(category = get_request['post_category'])
+        else:
+            filter_data = Post.objects.none()
+        return filter_data
 
+class ListPostView(FilterListView, TemplateView):
+    template_name = 'blog/index.html'
     context = {
-        "app_css" : 'blog/css/styles.css',
-        'title' : 'Blog | Kelas Terbuka',
-        'heading' : "Blog",
-        'subheading' : 'Blog on Kelas Terbuka',
-        'Posts' : posts,
-        'Categories': categories
-    }
-    return render(request, "blog/index.html", context)
+            "app_css" : 'blog/css/styles.css',
+            'title' : 'Blog | Kelas Terbuka',
+            'heading' : "Blog",
+            'subheading' : 'Blog on Kelas Terbuka',
+        }
 
-def createPost(request):
-    post_form = PostForm(request.POST)
+    def get_context_data(self,*args,**kwargs):
+        # posts = Post.objects.all()
+        posts = self.get_list_data(self.request.GET)
+        categories = Post.objects.values_list('category', flat=True).distinct()
+        
+        self.context['Posts'] = posts
+        self.context['Categories'] = categories
+
+        return self.context
+
+class DeletePostView(RedirectView):
+    pattern_name = 'blog:index'
+    
+    def get_redirect_url(self, *args, **kwargs):
+        Post.objects.filter(id = kwargs['id_post']).delete()
+        return super().get_redirect_url()
+
+class DetailPostView(TemplateView):
+    template_name = 'blog/detail.html'
+    context = {
+        'app_css' : 'blog/css/styles/css',
+        'title' : 'Blog'
+    }
+
+    def get_context_data(self, *args, **kwargs):
+        post = Post.objects.get(slug = kwargs['slug_post'])
+        self.context['Post'] = post
+
+        return self.context
+
+class FormPostView(View):
+    template_name = 'blog/create.html'
+    form = PostForm()
+    mode = None
     context = {
         "app_css" : 'blog/css/styles.css',
         'title' : 'Create Blog | Kelas Terbuka',
         'heading' : "Create Blog",
         'subheading' : 'Create Blog on Kelas Terbuka',
-        'post_form' : post_form
+        'post_form' : form
     }
 
-    if request.method == 'POST' :
-        if post_form.is_valid():
-            post_form.save()
-            return redirect('blog:index')
+    def get(self, *args, **kwargs):
+        # check mode
+        if self.mode == 'update':
+            update_post = Post.objects.get(id = kwargs['id_post'])
+            data_post = update_post.__dict__
+            self.form = PostForm(initial = data_post, instance = update_post)
+
+            self.context = {
+                'title' : 'Update Blog | Kelas Terbuka',
+                'heading' : "Update Blog",
+                'subheading' : 'Update Blog on Kelas Terbuka',
+                'post_form' : self.form
+            }
+        return render(self.request, self.template_name, self.context)
+
+    def post(self, *args, **kwargs):
+        if kwargs.__contains__('id_post'):
+            # update
+            update_post = Post.objects.get(id = kwargs['id_post'])
+            self.form = PostForm(self.request.POST, instance = update_post)
         else :
-            error = post_form.errors
-            context['error'] = error
+            # create
+            self.form = PostForm(self.request.POST)
 
-    return render(request, "blog/create.html", context)
-
-def deletePost(request, id_post):
-    # filter data by id, delete data from id
-    Post.objects.filter(id = id_post).delete()
-    return redirect('blog:index')
-
-def updatePost(request, id_post):
-    # get post by id
-    update_post = Post.objects.get(id = id_post)
-    # get data post from id
-    data_post = {
-        "title" : update_post.title,
-        "body" : update_post.body,
-        "categoory" : update_post.category,
-    }
-    post_form = PostForm(request.POST or None, initial = data_post, instance = update_post)
-
-    context = {
-        "app_css" : 'blog/css/styles.css',
-        'title' : 'Update Blog | Kelas Terbuka',
-        'heading' : "Update Blog",
-        'subheading' : 'Update Blog on Kelas Terbuka',
-        'post_form' : post_form
-    }
-
-    if request.method == 'POST' :
-        if post_form.is_valid():
-            post_form.save()
-            return redirect('blog:index')
-        else :
-            error = post_form.errors
-            context['error'] = error
-
-    return render(request, "blog/create.html", context)
-
-def categoryPost(request, categoryInput):
-    posts = Post.objects.filter(category = categoryInput)
-    categories = Post.objects.values('category').distinct()
-    context = {
-        "app_css" : 'blog/css/styles.css',
-        "title" : "Blog",
-        'Posts' : posts,
-        'Categories': categories
-    }
-    return render(request, "blog/category.html", context)
-
-def detailPost(request, slugInput):
-    post = Post.objects.get(slug = slugInput)
-    context = {
-        "app_css" : 'blog/css/styles.css',
-        "title" : "Blog",
-        'Post' : post
-    }
-    return render(request, "blog/detail.html", context)
+        if self.form.is_valid():
+            self.form.save()
+        
+        return redirect('blog:index')

@@ -16,8 +16,8 @@
     <div class="col">
       <h1>Blog By Category</h1>
       <a href="{% url 'blog:index' %}" class="badge badge-primary"> All-post </a>
-      {% for dataCategory in Categories %}
-      <a href="{% url 'blog:category' categoryInput=dataCategory.category%}" class="badge badge-primary"> {{dataCategory.category}} </a>
+      {% for category in Categories %}
+      <a href="{% url 'blog:index' %}?post_category={{category}}" class="badge badge-primary"> {{category}} </a>
       {% endfor %}
     </div>
     <div class="col mt-2">
@@ -28,10 +28,10 @@
   {% for post in Posts %}
     <div class="row my-5">
       <div class="col">
-        <a href="{% url 'blog:detail' slugInput=post.slug %}" class="link-detail-post h1">
+        <a href="{% url 'blog:detail' slug_post=post.slug %}" class="link-detail-post h1">
           {{post.title}}
         </a>
-        <p> {{post.body | truncatechars:200}} <a href="{% url 'blog:detail' slugInput=post.slug %}">read more</a> </p>
+        <p> {{post.body | truncatechars:200}} <a href="{% url 'blog:detail' slug_post=post.slug %}">read more</a> </p>
         <p> {{post.publish}} </p>
       </div>
     </div>
