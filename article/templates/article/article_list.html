@@ -15,19 +15,21 @@
         <ol>
           {% for article in object_list %}
             <li>
+              <a href="{% url 'article:detail' article.slug %}">
                 {{article.title}} ~ {{article.author}} | {{article.publish}}
+              </a>
             </li>
           {% endfor %}
         </ol>
   </div>
 
-  
+  <!-- nav pagination -->
   <nav>
     <ul class="pagination">
     {% if is_paginated %}
           <li class="page-item">
             {% if page_obj.has_previous %}
-              <a class="page-link" href="{% url 'blog:article' page_obj.previous_page_number %}">&laquo;</a>
+              <a class="page-link" href="{% url 'article:index' page_obj.previous_page_number %}">&laquo;</a>
             {% else %}
               <span class="disabled page-link text-muted">&laquo;</span>
             {% endif %}
@@ -35,7 +37,7 @@
 
           {% for page_num in paginator.page_range %}
           <li class="page-item">
-              <a class="page-link" href="{% url 'blog:article' page_num %}">
+              <a class="page-link" href="{% url 'article:index' page_num %}">
                 {{page_num}}
               </a>
             </li>
@@ -43,7 +45,7 @@
 
           <li class="page-item">
             {% if page_obj.has_next %}
-              <a class="page-link" href="{% url 'blog:article' page_obj.next_page_number %}">&raquo;</a>
+              <a class="page-link" href="{% url 'article:index' page_obj.next_page_number %}">&raquo;</a>
             {% else %}
               <span class="disabled page-link text-muted">&raquo;</span>
             {% endif %}
@@ -51,6 +53,4 @@
     {% endif %}
     </ul>
   </nav>
-    
-
 {% endblock content-1 %}

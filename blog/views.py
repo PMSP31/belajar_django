@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.base import TemplateView, RedirectView
-from django.views.generic import ListView
-from .models import Article, Post 
+from .models import Post 
 from .forms import PostForm
 
 # Create your views here.
@@ -95,22 +94,3 @@ class FormPostView(View):
             self.form.save()
         
         return redirect('blog:index')
-
-class ArticleListView(ListView):
-    model = Article
-    # order
-    ordering = ['publish']
-    # pagination
-    paginate_by = 2
-    # memberi context
-    extra_context = {
-        'app_css' : 'blog/css/styles.css',
-        'title' : 'Article | Kelas Terbuka',
-        'heading' : "Article",
-        'subheading' : 'Article on Kelas Terbuka',
-    }
-
-    def get_context_data(self, **kwargs):
-        self.kwargs.update(self.extra_context)
-        kwargs = self.kwargs
-        return super().get_context_data(**kwargs)

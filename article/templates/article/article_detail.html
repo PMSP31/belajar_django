@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block app_css %}
+<link rel="stylesheet" href="{% static 'blog/css/styles.css'%}" />
+{% endblock app_css %}
+
+{% block header %}
+<h1 class="display-4 text-left" style="margin-top: 100px;">{{heading}}</h1>
+<p class="lead text-left">~ {{subheading}}</p>
+{% endblock header %}
+
+{% block content-1 %}
+    <div class="row my-5">
+        <div class="col">
+        <a href="{% url 'article:index' 1 %}" class="btn btn-primary">Back</a>
+        <h1>{{object.title}}</h1>
+        <span class="text-muted">Author : {{object.author}} </span>
+        <br>
+        <span class="text-muted">Publish : {{object.publish}} </span>
+        <br>
+        <span class="text-muted">Update : {{object.update}} </span>
+        <br>
+        <br>
+        <p>
+            {{object.content}}
+        </p>
+        <hr>
+        <br>
+        <h3>Other Articles</h3>
+        <ol>
+            {% for article in other_articles %}
+              <li>
+                <a href="{% url 'article:detail' article.slug %}">
+                  {{article.title}} ~ {{article.author}} | {{article.publish}}
+                </a>
+              </li>
+            {% endfor %}
+          </ol>
+    </div>
+{% endblock content-1 %}
