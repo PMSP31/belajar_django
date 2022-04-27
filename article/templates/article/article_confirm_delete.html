@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block content-1 %}
+<h1>You Sure To Delete <b>"{{object.title}}" ?? </b></h1>
+<form method="post">
+  {% csrf_token %}
+  <input type="submit" value="Yes" class="btn btn-danger" />
+  <a href="{% url 'article:index' 1 %}">
+    <input type="button" value="No" class="btn btn-outline-primary" />
+  </a>
+</form>
+{% endblock content-1 %}

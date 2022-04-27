@@ -25,6 +25,11 @@
         <p>
             {{object.content}}
         </p>
+        <br>
+        <br>
+        <a href="{% url 'article:update' object.pk %}" class="btn btn-outline-info">Update1</a>
+        <a href="{% url 'article:update-model' object.pk %}" class="btn btn-outline-info">Update2</a>
+        <a href="{% url 'article:delete' object.pk %}" class="btn btn-danger">Delete</a>
         <hr>
         <br>
         <h3>Other Articles</h3>
